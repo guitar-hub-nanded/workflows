@@ -2,7 +2,7 @@ name: BDD Cucumber TestNG - Scheduled Tests
 
 on:
   schedule:
-    - cron: '30 0 * * *'  # Runs every day at 6:00 AM IST (0:30 AM UTC)
+    - cron: '45 9 * * *'  # 3:15 PM IST
   workflow_dispatch:       # Allows manual run via GitHub UI
 
 jobs:
