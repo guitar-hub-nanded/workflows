@@ -27,5 +27,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: cucumber-reports
-          path: target/cucumber-reports/  # Adjust if your report path is different
+          path: target/  # Adjust if your report path is different
 
