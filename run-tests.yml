@@ -1,22 +1,31 @@
-name: Scheduled Test Execution
+name: BDD Cucumber TestNG - Scheduled Tests
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Runs daily at midnight UTC (adjust for IST later)
-  workflow_dispatch:      # Allows manual trigger from GitHub interface
+    - cron: '30 0 * * *'  # Runs every day at 6:00 AM IST (0:30 AM UTC)
+  workflow_dispatch:       # Allows manual run via GitHub UI
 
 jobs:
-  run-tests:
+  run-bdd-tests:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Set up JDK 17
+      - name: Set up Java
         uses: actions/setup-java@v3
         with:
           java-version: '17'
+          distribution: 'temurin'
 
-      - name: Build and test with Maven
+      - name: Build and Run Tests using Maven
         run: mvn clean test
+
+      - name: Upload Cucumber HTML Reports
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cucumber-reports
+          path: target/cucumber-reports/  # Adjust if your report path is different
+
